@@ -1,33 +1,45 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import userLocalStorage from "../util/userLocalStore";
 const LoginForm = () => {
-  const userStore = userLocalStorage.get();
-
+  const userStore = userLocalStorage.get() || [];
+  const [isShowPassword, setIsShowPassword] = useState(false) 
+  
   //handle on input form
   const handleOninput = (event) => {
     event.target.parentElement.classList.remove("invalid");
   };
-
+  
+  //handle show pass word
+  const handleShowPassword = () =>{
+    const isStatus = !isShowPassword
+    setIsShowPassword(isStatus)
+  }
   //handle submit form
   const handleOnsubmit = (event) => {
     event.preventDefault();
-    const inputElement = event.target.querySelectorAll('input')
-    const nameInput = inputElement[0].value
-    const passwordInput = inputElement[1].value
-    const element = event.target.querySelectorAll('.form-group')
-    
-    userStore.forEach(user => {
-        if(user.name === nameInput && user.password === passwordInput){
-            element.forEach(e => e.classList.remove('invalid'))
-            localStorage.setItem("isLogin", JSON.stringify({
-              isLogin: true
-            }))
-            window.location.href = "/";
-        }else{
-            element.forEach(e => e.classList.add('invalid'))
+    const inputElement = event.target.querySelectorAll("input");
+    const nameInput = inputElement[0].value;
+    const passwordInput = inputElement[1].value;
+    const element = event.target.querySelectorAll(".form-group");
+    if (userStore.length > 0) {
+      userStore.forEach((user) => {
+        if (user.name === nameInput && user.password === passwordInput) {
+          element.forEach((e) => e.classList.remove("invalid"));
+          localStorage.setItem(
+            "isLogin",
+            JSON.stringify({
+              isLogin: true,
+            })
+          );
+          window.location.href = "/";
+        } else {
+          element.forEach((e) => e.classList.add("invalid"));
         }
-    })
+      });
+    } else {
+      element.forEach((e) => e.classList.add("invalid"));
+    }
   };
   return (
     <form className="form-login" onSubmit={handleOnsubmit}>
@@ -35,21 +47,24 @@ const LoginForm = () => {
         <h2 className="form-header">Đăng Nhập Tài Khoản</h2>
         <div className="form-group">
           <input
-          autoComplete="user names"
-            type="text" name="name"
+            autoComplete="user names"
+            type="text"
+            name="name"
             placeholder="User name .."
             onInput={handleOninput}
           />
           <p>Cần Nhập Lại Trường Này</p>
         </div>
         <div className="form-group ">
-          <input name="password"
-            type="password"
+          <input
+            name="password"
+            type={isShowPassword ? "text" : "password"}
             placeholder="Password .."
-            onInput={handleOninput} autoComplete="current-password"
+            onInput={handleOninput}
+            autoComplete="current-password"
           />
           <p>Cần Nhập Lại Trường Này</p>
-          <i className="far fa-eye-slash show-password"></i>
+          <i className="far fa-eye-slash show-password" onClick={handleShowPassword}></i>
         </div>
         <div className="form-description">
           <p>Bạn Chưa Có Tài Khoản ?</p>

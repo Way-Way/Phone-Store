@@ -65,6 +65,13 @@ const RegistryForm = () => {
       window.location.href = "/";
     }
   };
+
+  //handle show Pass word
+  const [isShowPassword, setIsShowPassword] = useState(false)
+  const handleShowPassword = () => {
+    const isStatus = !isShowPassword
+    setIsShowPassword(isStatus) 
+  }
   return (
     <form className="form-login" onSubmit={handleOnsubmit}>
       <div className="form-wrap">
@@ -84,13 +91,13 @@ const RegistryForm = () => {
           onInput={handleOninput}
         >
           <input
-            type="password"
+            type={isShowPassword ? "text" : "password"}
             name="password"
             placeholder="Password .."
             autoComplete="current-password"
           />
           <p>Cần Nhập Lại Trường Này</p>
-          <i className="far fa-eye-slash show-password"></i>
+          <i className="far fa-eye-slash show-password" onClick={handleShowPassword}></i>
         </div>
         <div className="form-group" onBlur={handleBlur} onInput={handleOninput}>
           <input
