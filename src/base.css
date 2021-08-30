@@ -1,0 +1,122 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Roboto', sans-serif;
+    font-size: 62.5%;
+}
+
+:root {
+    --navbar-height: 35px;
+    --navbar-background: #f34046;
+    --primary-color: rgb(41, 41, 41);
+}
+
+@media (min-width: 740px) and (max-width: 1023px) {
+    .header__logo {
+        text-align: center;
+        box-shadow: unset;
+        margin-top: 10px;
+        letter-spacing: 5px;
+    }
+    .product-item img {
+        height: 210px;
+    }
+}
+
+@media (max-width: 739px) {
+    .header__logo {
+        display: none;
+    }
+    .mobile-logo {
+        display: inline;
+        text-transform: uppercase;
+        color: rgb(108, 163, 24);
+        float: left;
+        line-height: var(--navbar-height);
+        margin-left: 20px;
+    }
+    .product {
+        margin: 0 15px;
+    }
+}
+
+@media (max-width: 1023px) {
+    .wrap-icon-menu {
+        display: inline-block;
+    }
+    .navbar {
+        text-align: right;
+    }
+    .navbar,
+    .navbar__section {
+        display: block;
+        color: #000;
+    }
+    .navbar__section {
+        display: none;
+        animation: show linear 0.3s forwards;
+        background-color: rgb(219, 219, 219);
+    }
+    @keyframes show {
+        from {
+            opacity: 0;
+            transform: translateY(50%);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .navbar__category {
+        margin-left: 0;
+    }
+    .navbar__contact {
+        margin-right: 0;
+    }
+    .navbar__item {
+        text-align: center;
+        padding: 12px 0;
+        letter-spacing: 1px;
+    }
+    .navbar__item {
+        color: #000;
+    }
+    .navbar__item:hover {
+        opacity: unset;
+        background-color: rgb(206, 206, 206);
+    }
+    #checkbox-menu:checked~.navbar__section {
+        display: block;
+    }
+    .Header {
+        display: unset;
+        padding: 0;
+    }
+    .header__form {
+        text-align: center;
+        margin: 20px 0;
+    }
+    .header__information {
+        padding-bottom: 20px;
+    }
+    .header__information ul {
+        justify-content: flex-end;
+        margin-right: 40px;
+    }
+    .header__form input {
+        width: 60%;
+    }
+    .category>ul>li:first-child {
+        margin-left: 0;
+    }
+    .product {
+        margin: 40px 10px 0;
+    }
+    .category ul li:last-child {
+        border-right: unset;
+    }
+}
